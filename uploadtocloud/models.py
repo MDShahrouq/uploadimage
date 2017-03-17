@@ -1,18 +1,23 @@
-from __future__ import unicode_literals
-
 from django.db import models
+import time
+from pygments.lexers import get_all_lexers
+from pygments.styles import get_all_styles
+from django.core.validators import RegexValidator
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters.html import HtmlFormatter
+from pygments import highlight
+import random
+from random import randint
 
-# Create your models here.
-class Uploadtocloud_images(models.Model):
+owner = models.ForeignKey('auth.User', related_name='register')
+highlighted = models.TextField()
+
+class Uploadtoimage(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    #v_id = models.CharField(max_length=100,null=True, blank=True,default='')
+    c_type = models.TextField(blank=True,default='',null=True)
     photo = models.ImageField(upload_to="/projectimg",null=True, blank=True)
-    link=models.TextField(blank=True,default='')
     img_name = models.TextField(null=True,blank=True,default='')
     img_type = models.TextField(null=True,blank=True,default='')
-    
-   # photo = models.ImageField(upload_to="projectimg/",storage=fs, null=True, blank=True)
-    
     
     class Meta:
         ordering = ('created',)
