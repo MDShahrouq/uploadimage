@@ -120,15 +120,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-if os.environ.get('DATABASE_URL', None):
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
-
-
-DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
