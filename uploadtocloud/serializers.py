@@ -28,19 +28,19 @@ class UploadtoimageSerializer(serializers.ModelSerializer):
         Create and return a new `Snippet` instance, given the validated data.
         """
         import sys
-        link=''
+       # link=[]
         # image="image"+str(random.randint(100, 999))
         public_id='id'+str(random.randint(100000, 999999))
 
         
 
         if(bool(validated_data.get('photo')) == True):
-         cloudinary.uploader.upload(validated_data.get('photo'),public_id ="kuimages/"+public_id)
+         cloudinary.uploader.upload(validated_data.get('photo'),public_id ="testimage/"+public_id)
 
         if(bool(validated_data.get('photo')) == True):
          link=public_id+".jpg"
 
-        objects=Uploadtoimage.objects.create(c_type=validated_data.get('c_type'),photo=link,link=link,img_name=validated_data.get('img_name'),img_type=validated_data.get('img_type'))
+        objects=Uploadtoimage.objects.create(c_type=validated_data.get('c_type'),photo=link,img_name=validated_data.get('img_name'),img_type=validated_data.get('img_type'))
 
         return objects
 
