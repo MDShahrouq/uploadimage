@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'uploadimage.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dccvs0pv9vjjbq',                      
+        'USER': 'abdsupvziqvlme',
+        'PASSWORD': '67078e4246218391045ed6e33cfd1856351dc1f6cfaec5340b7e3a75ecd3e75c',
+        'HOST': 'ec2-23-23-186-157.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
