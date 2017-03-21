@@ -20,7 +20,7 @@ class UploadtoimageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Uploadtoimage
-        fields = ('pk','c_type','photo','img_name','img_type')
+        fields = ('pk','c_type','photo','img_name','img_type','link')
         #write_only_fields = ('firstame', 'lastname')
 
     def create(self, validated_data):
@@ -40,7 +40,7 @@ class UploadtoimageSerializer(serializers.ModelSerializer):
         if(bool(validated_data.get('photo')) == True):
          link=public_id+".jpg"
 
-        objects=Uploadtoimage.objects.create(c_type=validated_data.get('c_type'),photo=link,img_name=validated_data.get('img_name'),img_type=validated_data.get('img_type'))
+        objects=Uploadtoimage.objects.create(c_type=validated_data.get('c_type'),photo=link,link=link,img_name=validated_data.get('img_name'),img_type=validated_data.get('img_type'))
 
         return objects
 

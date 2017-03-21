@@ -31,18 +31,18 @@ def get_queryset(request):
   objects=Uploadtoimage.objects.all()
 
   for obj in objects:
-   print sys.stderr,obj.image_id
+   print sys.stderr,obj.pk
 
-   if(obj.image_id != ""):
-    if(Uploadtoimage.objects.filter(pk=obj.image_id).exists()):
-     image_details=Uploadtoimage.objects.get(pk=obj.image_id)
-     image_link='http://res.cloudinary.com/mdsrk/image/upload/v1490081508/testimage'+image_details.link
-    else:
-     image_link=""
-   else:
-    image_link=''
+   # if(obj.pk != ""):
+  if(Uploadtoimage.objects.filter(pk=obj.pk).exists()):
+    image_details=Uploadtoimage.objects.get(pk=obj.pk)
+    image_link='http://res.cloudinary.com/mdsrk/image/upload/v1490081508/testimage'+image_details.photo
+  else:
+    image_link=""
+   # else:
+   #  image_link=''
   
-   details.append({
+  details.append({
               'Categories':Uploadtoimage.objects.filter(pk=obj.pk).values('pk','c_type')[0],
               'image_link' : image_link
           })

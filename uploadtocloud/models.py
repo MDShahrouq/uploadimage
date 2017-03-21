@@ -21,6 +21,7 @@ class Uploadtoimage(models.Model):
     photo = models.ImageField(upload_to="/projectimg",null=True, blank=True)
     img_name = models.TextField(null=True,blank=True,default='')
     img_type = models.TextField(null=True,blank=True,default='')
-    
+    link=models.TextField(blank=True,default='')
+
     class Meta:
         ordering = ('created',)
