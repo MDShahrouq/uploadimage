@@ -19,5 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('uploadtocloud.urls')),
+    url(r'^', include('get_links.urls')),
+
 
 ]

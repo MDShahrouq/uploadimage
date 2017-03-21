@@ -8,6 +8,9 @@ from pygments.formatters.html import HtmlFormatter
 from pygments import highlight
 import random
 from random import randint
+# from raven.contrib.django.raven_compat.models import client
+
+# client.captureException()
 
 owner = models.ForeignKey('auth.User', related_name='register')
 highlighted = models.TextField()

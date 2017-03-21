@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'uploadtocloud',
-    'rest_framework'
+    'rest_framework',
+    #'raven.contrib.django.raven_compat',
+    'get_links',
 ]
 
 MIDDLEWARE = [
@@ -124,7 +126,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+# import os
+# import raven
 
+# RAVEN_CONFIG = {
+#     'dsn': 'https://0f5ff7620d07495c889c3c93aac9efe9:f2c388b12c0e48bab168d98b93ff871e@sentry.io/150099',
+#     # If you are using git, you can also automatically configure the
+#     # release based on the git info.
+#     'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+# }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
