@@ -50,6 +50,9 @@ class UploadtoimageSerializer(serializers.ModelSerializer):
         Update and return an existing `Snippet` instance, given the validated data.
         """
         instance.c_type = validated_data.get('c_type', instance.c_type)
+        instance.image_name = validated_data.get('image_name', instance.image_name)
+        instance.link = validated_data.get('link',instance.link)
+        instance.save()
         return instance
 
 

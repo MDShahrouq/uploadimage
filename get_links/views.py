@@ -19,7 +19,7 @@ def JSONResponse(data = None, status = StatusCode.OK):
     else:
         return HttpResponse(status = StatusCode.NOT_FOUND)
 
-def get_queryset(request):
+def get_queryset(request, format=None):
 
   from django.http import JsonResponse
 
@@ -31,19 +31,28 @@ def get_queryset(request):
   objects=Uploadtoimage.objects.all()
 
   for obj in objects:
-   print sys.stderr,obj.pk
+   print sys.stderr,obj.link
 
-   # if(obj.pk != ""):
-  if(Uploadtoimage.objects.filter(pk=obj.pk).exists()):
-    image_details=Uploadtoimage.objects.get(pk=obj.pk)
-    image_link='http://res.cloudinary.com/mdsrk/image/upload/v1490081508/testimage'+image_details.photo
-  else:
-    image_link=""
+   if(obj.link != ""):
+    if(Uploadtoimage.objects.filter(link=obj.link).exists()):
+     image_details=Uploadtoimage.objects.get(link=obj.link)
+     image_link='http://res.cloudinary.com/mdsrk/image/upload/v1490081508/testimage/'+image_details.link
+    else:
+     image_link=""
+   else:
+    image_link=''
+  
+   # # if(obj.pk != ""):
+   # if(Uploadtoimage.objects.filter(link=obj.link).exists()):
+   #  image_details=Uploadtoimage.objects.get(link=obj.link)
+   #  image_link='http://res.cloudinary.com/mdsrk/image/upload/v1490081508/testimage/'+image_details.link
+   # else:
+    #image_link=""
    # else:
    #  image_link=''
   
-  details.append({
-              'Categories':Uploadtoimage.objects.filter(pk=obj.pk).values('pk','c_type')[0],
+   details.append({
+              'Categories':Uploadtoimage.objects.filter(link=obj.link).values('pk','c_type')[0],
               'image_link' : image_link
           })
 
