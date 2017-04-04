@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'uploadtocloud',
     'rest_framework',
-    #'raven.contrib.django.raven_compat',
+    'raven.contrib.django.raven_compat',
     'get_links',
 ]
 
@@ -113,20 +113,22 @@ USE_L10N = True
 
 USE_TZ = True
 
-# import os
-# import raven
+import os
+import raven
 
-# RAVEN_CONFIG = {
-#     'dsn': 'https://0f5ff7620d07495c889c3c93aac9efe9:f2c388b12c0e48bab168d98b93ff871e@sentry.io/150099',
-#     # If you are using git, you can also automatically configure the
-#     # release based on the git info.
-#     'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
-# }
+RAVEN_CONFIG = {
+    'dsn': 'https://0f5ff7620d07495c889c3c93aac9efe9:f2c388b12c0e48bab168d98b93ff871e@sentry.io/150099',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 # Static asset configuration
 # Static asset configuration
+
+
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
@@ -135,3 +137,41 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'WARNING',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+        'console': {
+            'level': 'WARNING',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['sentry'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+        'raven': {
+            'level': 'WARNING',
+            'handlers': ['sentry'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'WARNING',
+            'handlers': ['sentry'],
+            'propagate': False,
+        },
+    }
+}
